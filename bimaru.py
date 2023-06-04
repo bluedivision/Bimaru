@@ -169,18 +169,25 @@ class Bimaru(Problem):
 
 
 if __name__ == "__main__":
-
     my_board = Board.parse_instance()
-    my_board.print()
+    # verificar se tem barcos. se sim, atualizar o count
 
-    #C = np.array([["0" for x in range(10)]for y in range(10)])
+    my_board1 = Board(my_board.matrix, my_board.nrow, my_board.ncol, [0, 2, 3, 4])
 
-    #for i in range(5):
+    print(my_board1.count)
+    print(my_board.count)
+
+    # C = np.array([["0" for x in range(10)]for y in range(10)])
+
+    # for i in range(5):
     #    C[i][2] = "T"
 
-    #my_board = Board(C)
+    # my_board = Board(C)
 
-    #my_board.print()
+    # my_board.print()
+
+    # print(depth_first_tree_search(Bimaru(Board.parse_instance())).state.board)
+    # exit(0)
 
     # TODO:
     # Ler o ficheiro do standard input,
