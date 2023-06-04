@@ -96,6 +96,22 @@ class Board:
         nrow = [int(x) for x in line1[1:]]
         line2 = lines[1].split()
         ncol = [int(y) for y in line2[1:]]
+<<<<<<< HEAD
+        
+        #n_hint = int(lines[2])
+        #raw_matrix = [lines.split() for line in lines[-n_hint:]]
+        raw_matrix = [line.split() for line in lines[3:]]
+
+        
+        matrix = np.full((10,10),'0')
+        
+        for row in raw_matrix:
+            #row.pop(0)
+            matrix[int(row[1]),int(row[2])] = row[3]
+            
+        return matrix, nrow, ncol
+=======
+>>>>>>> ff5f671cbbbab3fca7d6d4e20c88fb9de441218d
 
         # n_hint = int(lines[2])
         # raw_matrix = [lines.split() for line in lines[-n_hint:]]
