@@ -91,7 +91,7 @@ class Board:
         
         #n_hint = int(lines[2])
         #raw_matrix = [lines.split() for line in lines[-n_hint:]]
-        raw_matrix = [lines.split() for line in lines[3:]]
+        raw_matrix = [line.split() for line in lines[3:]]
         
         
         matrix = np.full((10,10),'0')
