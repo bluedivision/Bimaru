@@ -114,8 +114,6 @@ class Board:
             matrix[int(row[1]),int(row[2])] = row[3]
             
         return matrix, nrow, ncol
-=======
->>>>>>> ff5f671cbbbab3fca7d6d4e20c88fb9de441218d
 
         # n_hint = int(lines[2])
         # raw_matrix = [lines.split() for line in lines[-n_hint:]]
