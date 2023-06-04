@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< Updated upstream
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
@@ -7,6 +8,10 @@
     <list default="true" id="9da9375c-b441-4b63-a283-b4916ab22ccc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/bimaru.py" beforeDir="false" afterPath="$PROJECT_DIR$/bimaru.py" afterDir="false" />
     </list>
+=======
+  <component name="ChangeListManager">
+    <list default="true" id="4519baa5-53df-42f3-bb13-f975c367f96b" name="Changes" comment="" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,11 +20,16 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< Updated upstream
   <component name="ProjectId" id="2QkDJNWLwvzQd0k90kEAxsoFnmV" />
+=======
+  <component name="ProjectId" id="2QkAXZyPRWI36yckYgILg97HTtv" />
+>>>>>>> Stashed changes
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< Updated upstream
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -92,6 +102,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685888612620</updated>
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/victo/Documents/Victor Backup/IST/4º ano/2S/AI/Bimaru"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4519baa5-53df-42f3-bb13-f975c367f96b" name="Changes" comment="" />
+      <created>1685887245635</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685887245635</updated>
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
