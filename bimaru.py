@@ -2,9 +2,9 @@
 # Devem alterar as classes e funções neste ficheiro de acordo com as instruções do enunciado.
 # Além das funções e classes já definidas, podem acrescentar outras que considerem pertinentes.
 
-# Grupo 00:
-# 00000 Nome1
-# 00000 Nome2
+# Grupo 155:
+# 94774 Víctor Liotti
+# 99435 Miguel Salvador
 
 import sys
 from search import (
@@ -16,7 +16,7 @@ from search import (
     greedy_search,
     recursive_best_first_search,
 )
-
+import numpy as np
 
 class BimaruState:
     state_id = 0
@@ -34,26 +34,37 @@ class BimaruState:
 
 class Board:
     """Representação interna de um tabuleiro de Bimaru."""
+    def __init__(self,matrix):
+        self.matrix = matrix
 
     def get_value(self, row: int, col: int) -> str:
-        """Devolve o valor na respetiva posição do tabuleiro."""
-        # TODO
-        pass
+        return self.matrix[row][col]
 
     def adjacent_vertical_values(self, row: int, col: int) -> (str, str):
-        """Devolve os valores imediatamente acima e abaixo,
-        respectivamente."""
-        # TODO
-        pass
+        if col > 0:
+            up = self.matrix[row-1][col]
+        else:
+            up = None
+        if col < 9:
+            down = self.matrix[row+1][col]
+        else:
+            down = None
+        return up, down
 
     def adjacent_horizontal_values(self, row: int, col: int) -> (str, str):
-        """Devolve os valores imediatamente à esquerda e à direita,
-        respectivamente."""
-        # TODO
-        pass
+        if row > 0:
+            left = self.matrix[row][col-1]
+        else:
+            left = None
+        if row < 9:
+            right = self.matrix[row][col+1]
+        else:
+            right = None
+        return left, right
 
     @staticmethod
     def parse_instance():
+
         """Lê o test do standard input (stdin) que é passado como argumento
         e retorna uma instância da classe Board.
 
@@ -63,14 +74,24 @@ class Board:
             > from sys import stdin
             > line = stdin.readline().split()
         """
-        # TODO
-        pass
+
+    def print(self):
+        a = ""
+        for i in range(10):
+            for j in range(10):
+                if self.matrix[i][j] == "0":
+                    a = a + "."
+                else:
+                    a = a + self.matrix[i][j]
+            a = a + "\n"
+        print(a)
 
     # TODO: outros metodos da classe
 
 
 class Bimaru(Problem):
     def __init__(self, board: Board):
+        self.initial_state = BimaruState(board)
         """O construtor especifica o estado inicial."""
         # TODO
         pass
@@ -105,6 +126,26 @@ class Bimaru(Problem):
 
 
 if __name__ == "__main__":
+
+    from sys import stdin
+    line = stdin.readline().split()
+    print(line)
+
+
+
+    f = open("instance01.txt", "r")
+    contents = f.read()
+    print(contents)
+
+    C = np.array([["0" for x in range(10)]for y in range(10)])
+
+    for i in range(5):
+        C[i][2] = "T"
+
+    my_board = Board(C)
+
+    my_board.print()
+
     # TODO:
     # Ler o ficheiro do standard input,
     # Usar uma técnica de procura para resolver a instância,
