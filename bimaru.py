@@ -37,12 +37,8 @@ class BimaruState:
 
 class Board:
     """Representação interna de um tabuleiro de Bimaru."""
-<<<<<<< Updated upstream
 
-    def __init__(self, matrix, nrow, ncol):
-=======
     def __init__(self, matrix, nrow, ncol, count = [1,2,3,4]):
->>>>>>> Stashed changes
         self.matrix = matrix
         self.nrow = nrow
         self.ncol = ncol
@@ -130,6 +126,7 @@ class Board:
 
 
 class Bimaru(Problem):
+
     def __init__(self, board: Board):
         self.initial_state = BimaruState(board)
         """O construtor especifica o estado inicial."""
@@ -141,6 +138,9 @@ class Bimaru(Problem):
         partir do estado passado como argumento."""
 
         my_board = state.board
+        i = 0
+        while my_board.count[i] != 0
+            i += 1
         #verificar 1º número q n é 0 no count
         
 
