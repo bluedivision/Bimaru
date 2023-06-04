@@ -37,11 +37,16 @@ class BimaruState:
 
 class Board:
     """Representação interna de um tabuleiro de Bimaru."""
+<<<<<<< Updated upstream
 
     def __init__(self, matrix, nrow, ncol):
+=======
+    def __init__(self, matrix, nrow, ncol, count = [1,2,3,4]):
+>>>>>>> Stashed changes
         self.matrix = matrix
         self.nrow = nrow
         self.ncol = ncol
+        self.count = count
 
     def get_value(self, row: int, col: int) -> str:
         return self.matrix[row][col]
@@ -134,6 +139,12 @@ class Bimaru(Problem):
     def actions(self, state: BimaruState):
         """Retorna uma lista de ações que podem ser executadas a
         partir do estado passado como argumento."""
+
+        my_board = state.board
+        #verificar 1º número q n é 0 no count
+        
+
+
         # TODO
         pass
 
@@ -169,7 +180,13 @@ class Bimaru(Problem):
 
 if __name__ == "__main__":
     my_board = Board.parse_instance()
-    my_board.print()
+    #verificar se tem barcos. se sim, atualizar o count
+
+
+    my_board1 = Board(my_board.matrix,my_board.nrow,my_board.ncol,[0,2,3,4])
+
+    print(my_board1.count)
+    print(my_board.count)
 
     # C = np.array([["0" for x in range(10)]for y in range(10)])
 
@@ -179,6 +196,9 @@ if __name__ == "__main__":
     # my_board = Board(C)
 
     # my_board.print()
+
+    #print(depth_first_tree_search(Bimaru(Board.parse_instance())).state.board)
+    #exit(0)
 
     # TODO:
     # Ler o ficheiro do standard input,
