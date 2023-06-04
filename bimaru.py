@@ -20,6 +20,7 @@ from search import (
 )
 import numpy as np
 
+
 class BimaruState:
     state_id = 0
 
@@ -36,6 +37,7 @@ class BimaruState:
 
 class Board:
     """Representação interna de um tabuleiro de Bimaru."""
+
     def __init__(self, matrix, nrow, ncol):
         self.matrix = matrix
         self.nrow = nrow
@@ -49,22 +51,22 @@ class Board:
 
     def adjacent_vertical_values(self, row: int, col: int) -> (str, str):
         if col > 0:
-            up = self.matrix[row-1][col]
+            up = self.matrix[row - 1][col]
         else:
             up = None
         if col < 9:
-            down = self.matrix[row+1][col]
+            down = self.matrix[row + 1][col]
         else:
             down = None
         return up, down
 
     def adjacent_horizontal_values(self, row: int, col: int) -> (str, str):
         if row > 0:
-            left = self.matrix[row][col-1]
+            left = self.matrix[row][col - 1]
         else:
             left = None
         if row < 9:
-            right = self.matrix[row][col+1]
+            right = self.matrix[row][col + 1]
         else:
             right = None
         return left, right
@@ -81,34 +83,31 @@ class Board:
             > from sys import stdin
             > line = stdin.readline().split()
         """
-        
+
         from sys import stdin
-        
+
         lines = stdin.readlines()
-        
+
         nrow = []
         ncol = []
-        
+
         line1 = lines[0].split()
         nrow = [int(x) for x in line1[1:]]
         line2 = lines[1].split()
         ncol = [int(y) for y in line2[1:]]
-        
-        #n_hint = int(lines[2])
-        #raw_matrix = [lines.split() for line in lines[-n_hint:]]
-        raw_matrix = [line.split() for line in lines[3:]]
-        
-        
-        matrix = np.full((10,10),'0')
-        
-        for row in raw_matrix:
-            #row.pop(0)
-            matrix[int(row[1]),int(row[2])] = row[3]
-            
-        return matrix, nrow, ncol
 
-##############################
-    
+        # n_hint = int(lines[2])
+        # raw_matrix = [lines.split() for line in lines[-n_hint:]]
+        raw_matrix = [line.split() for line in lines[3:]]
+
+        matrix = np.full((10, 10), '0')
+
+        for row in raw_matrix:
+            # row.pop(0)
+            matrix[int(row[1]), int(row[2])] = row[3]
+
+        return Board(matrix, nrow, ncol)
+
     def print(self):
         a = ""
         for i in range(10):
@@ -120,7 +119,7 @@ class Board:
             a = a + "\n"
         print(a)
 
-    #cuidado com o \n no fim do print
+    # cuidado com o \n no fim do print
 
     # TODO: outros metodos da classe
 
@@ -150,8 +149,15 @@ class Bimaru(Problem):
         """Retorna True se e só se o estado passado como argumento é
         um estado objetivo. Deve verificar se todas as posições do tabuleiro
         estão preenchidas de acordo com as regras do problema."""
-        # TODO
-        pass
+
+        nrow1 = state.board.nrow
+        ncol1 = state.board.ncol
+
+        for i in range(9):
+            test = True
+            if nrow1[i] != 0 or ncol1[i] != 0:
+                test = False
+        return test
 
     def h(self, node: Node):
         """Função heuristica utilizada para a procura A*."""
@@ -162,29 +168,20 @@ class Bimaru(Problem):
 
 
 if __name__ == "__main__":
-
-    from sys import stdin
-    line = stdin.readline().split()
-    print(line)
-
-
-
-    f = open("instance01.txt", "r")
-    contents = f.read()
-    print(contents)
-
-    C = np.array([["0" for x in range(10)]for y in range(10)])
-
-    for i in range(5):
-        C[i][2] = "T"
-
-    my_board = Board(C)
-
+    my_board = Board.parse_instance()
     my_board.print()
+
+    # C = np.array([["0" for x in range(10)]for y in range(10)])
+
+    # for i in range(5):
+    #    C[i][2] = "T"
+
+    # my_board = Board(C)
+
+    # my_board.print()
 
     # TODO:
     # Ler o ficheiro do standard input,
     # Usar uma técnica de procura para resolver a instância,
     # Retirar a solução a partir do nó resultante,
     # Imprimir para o standard output no formato indicado.
-    pass
