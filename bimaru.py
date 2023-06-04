@@ -36,11 +36,17 @@ class BimaruState:
 
 class Board:
     """Representação interna de um tabuleiro de Bimaru."""
-    def __init__(self,matrix):
+    def __init__(self, matrix, nrow, ncol, count):
         self.matrix = matrix
+        self.nrow = nrow
+        self.ncol = ncol
+        self.count = count
 
     def get_value(self, row: int, col: int) -> str:
         return self.matrix[row][col]
+
+    def set_value(self, row: int, col: int, val: str):
+        self.matrix[row][col] = val
 
     def adjacent_vertical_values(self, row: int, col: int) -> (str, str):
         if col > 0:
@@ -114,6 +120,8 @@ class Board:
                     a = a + self.matrix[i][j]
             a = a + "\n"
         print(a)
+
+    #cuidado com o \n no fim do print
 
     # TODO: outros metodos da classe
 
