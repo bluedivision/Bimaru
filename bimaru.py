@@ -36,10 +36,11 @@ class BimaruState:
 
 class Board:
     """Representação interna de um tabuleiro de Bimaru."""
-    def __init__(self, matrix, nrow, ncol):
+    def __init__(self, matrix, nrow, ncol, count=[1,2,3,4]):
         self.matrix = matrix
         self.nrow = nrow
         self.ncol = ncol
+        self.count = count
 
     def get_value(self, row: int, col: int) -> str:
         return self.matrix[row][col]
