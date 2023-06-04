@@ -38,7 +38,7 @@ class BimaruState:
 class Board:
     """Representação interna de um tabuleiro de Bimaru."""
 
-    def __init__(self, matrix, nrow, ncol, count = [1,2,3,4]):
+    def __init__(self, matrix, nrow, ncol, count=[1, 2, 3, 4]):
         self.matrix = matrix
         self.nrow = nrow
         self.ncol = ncol
@@ -96,22 +96,6 @@ class Board:
         nrow = [int(x) for x in line1[1:]]
         line2 = lines[1].split()
         ncol = [int(y) for y in line2[1:]]
-<<<<<<< HEAD
-        
-        #n_hint = int(lines[2])
-        #raw_matrix = [lines.split() for line in lines[-n_hint:]]
-        raw_matrix = [line.split() for line in lines[3:]]
-
-        
-        matrix = np.full((10,10),'0')
-        
-        for row in raw_matrix:
-            #row.pop(0)
-            matrix[int(row[1]),int(row[2])] = row[3]
-            
-        return matrix, nrow, ncol
-=======
->>>>>>> ff5f671cbbbab3fca7d6d4e20c88fb9de441218d
 
         # n_hint = int(lines[2])
         # raw_matrix = [lines.split() for line in lines[-n_hint:]]
@@ -142,7 +126,6 @@ class Board:
 
 
 class Bimaru(Problem):
-
     def __init__(self, board: Board):
         self.initial_state = BimaruState(board)
         """O construtor especifica o estado inicial."""
@@ -152,15 +135,6 @@ class Bimaru(Problem):
     def actions(self, state: BimaruState):
         """Retorna uma lista de ações que podem ser executadas a
         partir do estado passado como argumento."""
-
-        my_board = state.board
-        i = 0
-        while my_board.count[i] != 0
-            i += 1
-        #verificar 1º número q n é 0 no count
-        
-
-
         # TODO
         pass
 
@@ -196,10 +170,9 @@ class Bimaru(Problem):
 
 if __name__ == "__main__":
     my_board = Board.parse_instance()
-    #verificar se tem barcos. se sim, atualizar o count
+    # verificar se tem barcos. se sim, atualizar o count
 
-
-    my_board1 = Board(my_board.matrix,my_board.nrow,my_board.ncol,[0,2,3,4])
+    my_board1 = Board(my_board.matrix, my_board.nrow, my_board.ncol, [0, 2, 3, 4])
 
     print(my_board1.count)
     print(my_board.count)
@@ -213,8 +186,8 @@ if __name__ == "__main__":
 
     # my_board.print()
 
-    #print(depth_first_tree_search(Bimaru(Board.parse_instance())).state.board)
-    #exit(0)
+    # print(depth_first_tree_search(Bimaru(Board.parse_instance())).state.board)
+    # exit(0)
 
     # TODO:
     # Ler o ficheiro do standard input,
