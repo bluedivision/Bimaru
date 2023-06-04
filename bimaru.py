@@ -7,6 +7,8 @@
 # 99435 Miguel Salvador
 
 import sys
+import numpy as np
+
 from search import (
     Problem,
     Node,
@@ -74,7 +76,34 @@ class Board:
             > from sys import stdin
             > line = stdin.readline().split()
         """
+        
+        from sys import stdin
+        
+        lines = stdin.readlines()
+        
+        nrow = []
+        ncol = []
+        
+        line1 = lines[0].split()
+        nrow = [int(x) for x in line1[1:]]
+        line2 = lines[1].split()
+        ncol = [int(y) for y in line2[1:]]
+        
+        #n_hint = int(lines[2])
+        #raw_matrix = [lines.split() for line in lines[-n_hint:]]
+        raw_matrix = [lines.split() for line in lines[3:]]
+        
+        
+        matrix = np.full((10,10),'0')
+        
+        for row in raw_matrix:
+            #row.pop(0)
+            matrix[int(row[1]),int(row[2])] = row[3]
+            
+        return matrix, nrow, ncol
 
+##############################
+    
     def print(self):
         a = ""
         for i in range(10):
