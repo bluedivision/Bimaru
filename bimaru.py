@@ -105,9 +105,7 @@ class Board:
             #row.pop(0)
             matrix[int(row[1]),int(row[2])] = row[3]
             
-        return matrix, nrow, ncol
-
-##############################
+        return Board(matrix, nrow, ncol)
     
     def print(self):
         a = ""
@@ -150,8 +148,15 @@ class Bimaru(Problem):
         """Retorna True se e só se o estado passado como argumento é
         um estado objetivo. Deve verificar se todas as posições do tabuleiro
         estão preenchidas de acordo com as regras do problema."""
-        # TODO
-        pass
+        
+        nrow1 = state.board.nrow
+        ncol1 = state.board.ncol
+
+        for i in range(9):
+            test = True
+            if nrow1[i] != 0 or ncol1[i] != 0:
+                test = False
+        return test
 
     def h(self, node: Node):
         """Função heuristica utilizada para a procura A*."""
@@ -161,30 +166,23 @@ class Bimaru(Problem):
     # TODO: outros metodos da classe
 
 
+
 if __name__ == "__main__":
 
-    from sys import stdin
-    line = stdin.readline().split()
-    print(line)
-
-
-
-    f = open("instance01.txt", "r")
-    contents = f.read()
-    print(contents)
-
-    C = np.array([["0" for x in range(10)]for y in range(10)])
-
-    for i in range(5):
-        C[i][2] = "T"
-
-    my_board = Board(C)
-
+    my_board = Board.parse_instance()
     my_board.print()
+
+    #C = np.array([["0" for x in range(10)]for y in range(10)])
+
+    #for i in range(5):
+    #    C[i][2] = "T"
+
+    #my_board = Board(C)
+
+    #my_board.print()
 
     # TODO:
     # Ler o ficheiro do standard input,
     # Usar uma técnica de procura para resolver a instância,
     # Retirar a solução a partir do nó resultante,
     # Imprimir para o standard output no formato indicado.
-    pass
