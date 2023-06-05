@@ -136,7 +136,122 @@ class Bimaru(Problem):
         """Retorna uma lista de ações que podem ser executadas a
         partir do estado passado como argumento."""
         # TODO
-        pass
+
+        nrow = state.board.nrow
+        ncol = state.board.ncol
+
+        action_list = []
+
+        for i in range(10):
+            for j in range(10):
+                # para cada elemento diferente de '0' e 'W' e 'w', desconta um valor deste elemente em nrow e ncol
+                if state.board.matrix[i][j] != '0' and state.board.matrix[i][j] != 'W' and state.board.matrix[i][j] != 'w' and state.board.matrix[i][j] != '.':
+                    nrow[i] = nrow[i] - 1
+                    ncol[j] = ncol[j] - 1
+
+                    # let '*' represents 'not water'
+
+
+
+                    # left actions
+                    if state.board.matrix[i][j] == 'L' or state.board.matrix[i][j] == 'l':
+                        for m in range(-1,3):
+                            if j+m in range(10):
+                                if i + 1 in range(10):
+                                    action_list.append((i + 1, j + m, 'w'))
+                                if i - 1 in range(10):
+                                    action_list.append((i - 1, j + m, 'w'))
+                                if m == -1:
+                                    action_list.append((i, j + m, 'w'))
+                                if m == 1:
+                                    action_list.append((i, j + m, '*'))
+
+                    # right actions
+                    if state.board.matrix[i][j] == 'R' or state.board.matrix[i][j] == 'r':
+                        for m in range(-2, 2):
+                            if j + m in range(10):
+                                if i + 1 in range(10):
+                                    action_list.append((i + 1, j + m, 'w'))
+                                if i - 1 in range(10):
+                                    action_list.append((i - 1, j + m, 'w'))
+                                if m == 1:
+                                    action_list.append((i, j + m, 'w'))
+                                if m == -1:
+                                    action_list.append((i, j + m, '*'))
+
+                    # top actions
+                    if state.board.matrix[i][j] == 'T' or state.board.matrix[i][j] == 't':
+                        for m in range(-1, 3):
+                            if i + m in range(10):
+                                if j + 1 in range(10):
+                                    action_list.append((i + m, j + 1, 'w'))
+                                if j - 1 in range(10):
+                                    action_list.append((i + m, j - 1, 'w'))
+                                if m == -1:
+                                    action_list.append((i + m, j, 'w'))
+                                if m == 1:
+                                    action_list.append((i + m, j, '*'))
+
+                    # bottom actions
+                    if state.board.matrix[i][j] == 'B' or state.board.matrix[i][j] == 'b':
+                        for m in range(-2, 2):
+                            if i + m in range(10):
+                                if j + 1 in range(10):
+                                    action_list.append((i + m, j + 1, 'w'))
+                                if j - 1 in range(10):
+                                    action_list.append((i + m, j - 1, 'w'))
+                                if m == 1:
+                                    action_list.append((i + m, j, 'w'))
+                                if m == -1:
+                                    action_list.append((i + m, j, '*'))
+
+                    # circle actions
+                    if state.board.matrix[i][j] == 'C' or state.board.matrix[i][j] == 'c':
+                        for m in (-1, 1):
+                            for n in (-1, 1):
+                                if i + m in range(10) and j + n in range(10):
+                                    action_list.append((i + m, j + n, 'w'))
+
+                    # middle actions
+                    if state.board.matrix[i][j] == 'M' or state.board.matrix[i][j] == 'm':
+                        for m in (-1, 1):
+                            if i + m in range(10):
+                                if state.board.matrix[i+m][j] == 'W' or state.board.matrix[i+m][j] == 'w':
+                                    for n in range(-2,3):
+                                        if j + n in range(10):
+                                            action_list.append((i + m, j + n, 'w'))
+                                            if i - m in range(10):
+                                                action_list.append((i - m, j + n, 'w'))
+                                            if n == 1 or n == -1:
+                                                action_list.append((i, j + n, '*'))
+                                break
+                            if j + m in range(10):
+                                if state.board.matrix[i][j+m] == 'W' or state.board.matrix[i][j+m] == 'w':
+                                    for n in range(-2,3):
+                                        if i + n in range(10):
+                                            action_list.append((i + n, j + m, 'w'))
+                                            if j - m in range(10):
+                                                action_list.append((i - n, j + m, 'w'))
+                                            if n == 1 or n == -1:
+                                                action_list.append((i + n, j, '*'))
+                                break
+
+
+        # water row and column
+
+        for k in range(10):
+            if nrow[k] == 0:
+                # 10 represents make all the None ('0') values of row(k) equals 'w'
+                action_list.append((k, 10, 'w'))
+            if ncol[k] == 0:
+                # 10 represents make all the None ('0') values of col(k) equals 'w'
+                action_list.append((10, k, 'w'))
+
+        # avoiding repeated actions
+        unique_list = list(set(action_list))
+
+        return unique_list
+
 
     def result(self, state: BimaruState, action):
         """Retorna o estado resultante de executar a 'action' sobre
@@ -144,7 +259,30 @@ class Bimaru(Problem):
         das presentes na lista obtida pela execução de
         self.actions(state)."""
         # TODO
-        pass
+
+
+        # action(int, int, str)
+        # it changes the matrix element [i][j] of the state to the value of str
+
+        i = action[0]
+        j = action[1]
+        value = action[2]
+
+        if value == 'w':
+            value = '.'
+        if i != 10 and j != 10:
+            state.board.matrix[i][j] = value
+        elif i == 10:
+            for row in range(10):
+                if state.board.matrix[row][j] == '0':
+                    state.board.matrix[row][j] = value
+        elif j == 10:
+            for column in range(10):
+                if state.board.matrix[i][column] == '0':
+                    state.board.matrix[i][column] = value
+
+
+        return state
 
     def goal_test(self, state: BimaruState):
         """Retorna True se e só se o estado passado como argumento é
@@ -174,8 +312,49 @@ if __name__ == "__main__":
 
     my_board1 = Board(my_board.matrix, my_board.nrow, my_board.ncol, [0, 2, 3, 4])
 
-    print(my_board1.count)
-    print(my_board.count)
+    print(my_board.matrix)
+
+    my_board.print()
+    problem = Bimaru(my_board)
+
+
+    s0 = BimaruState(my_board)
+
+    # print the list of actions
+
+    print(problem.actions(s0)) #<<<< CORRETO
+
+    act = problem.actions(s0)  #<<<< ERRADO
+    print(act)
+
+    # ??????? como podem ser diferentes???
+
+
+    s1 = problem.result(s0, (5, 10, 'w'))
+    print(s1.board.matrix)
+    print("\n")
+    s2 = problem.result(s1, (10, 1, 'w'))
+    print(s2.board.matrix)
+    print("\n")
+
+    s3 = problem.result(s2, (10, 2, 'w'))
+    print(s3.board.matrix)
+    print("\n")
+
+    s4 = problem.result(s3, (10, 3, 'w'))
+    print(s4.board.matrix)
+    print("\n")
+
+    s5 = problem.result(s4, (10, 5, 'w'))
+    print(s5.board.matrix)
+
+
+    #for x in actions:
+    #    s = problem.result(s0, x)
+
+    #print(s.board.matrix)
+
+
 
     # C = np.array([["0" for x in range(10)]for y in range(10)])
 
